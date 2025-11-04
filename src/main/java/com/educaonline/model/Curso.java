@@ -73,4 +73,16 @@ public class Curso {
     public String toString() {
         return "Curso{id='" + id + "', titulo='" + titulo + "', categoria='" + categoria + "', preco=" + preco + "}";
     }
+
+    public Object getAlunosMatriculados() {
+        throw new UnsupportedOperationException("Unimplemented method 'getAlunosMatriculados'");
+    }
+
+    public Object getLimiteVagas() {
+        throw new UnsupportedOperationException("Unimplemented method 'getLimiteVagas'");
+    }
+
+    public Object getCargaHoraria() {
+        throw new UnsupportedOperationException("Unimplemented method 'getCargaHoraria'");
+    }
 }

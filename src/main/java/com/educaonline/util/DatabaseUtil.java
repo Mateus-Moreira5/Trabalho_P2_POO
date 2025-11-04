@@ -104,7 +104,7 @@ public class DatabaseUtil {
         Aluno aluno3 = new Aluno("A003", "Pedro Costa", "pedro@email.com", "123456", "(11) 99999-3333");
         
         // Alunos VIP
-        AlunoVIP alunoVIP1 = new AlunoVIP("AV001", "Ana Santos", "ana.vip@email.com", "123456", "(11) 98888-1111");
+        AlunoVIP alunoVIP1 = new AlunoVIP("AV001", "Ana Santos", "ana.vip@email.com", "654321", "(11) 98888-1111");
         AlunoVIP alunoVIP2 = new AlunoVIP("AV002", "Lucas Lima", "lucas.vip@email.com", "123456", "(11) 98888-2222");
         
         alunoVIP1.setMentorAssociado("Carlos Silva");

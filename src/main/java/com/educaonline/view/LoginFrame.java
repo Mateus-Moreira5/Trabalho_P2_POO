@@ -1,4 +1,6 @@
 package main.java.com.educaonline.view;
+import main.java.com.educaonline.controller.UsuarioController;
+import main.java.com.educaonline.model.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -127,36 +129,47 @@ public class LoginFrame extends JFrame {
         add(panel);
         pack();
     }
-    
+
     private void fazerLogin() {
-        String email = campoEmail.getText().trim();
-        String senha = new String(campoSenha.getPassword());
-        boolean isVIP = checkVIP.isSelected();
-        
-        if (email.isEmpty()) {
-            mostrarErro("Por favor, informe seu email!");
-            campoEmail.requestFocus();
-            return;
-        }
-        
-        if (senha.isEmpty()) {
-            mostrarErro("Por favor, informe sua senha!");
-            campoSenha.requestFocus();
-            return;
-        }
-        
-        if (!email.contains("@") || !email.contains(".")) {
-            mostrarErro("Por favor, informe um email válido!");
-            campoEmail.requestFocus();
-            campoEmail.selectAll();
-            return;
-        }
-        
-        mostrarSucesso("Login realizado com sucesso!\n" + 
-                      (isVIP ? "🌟 Bem-vindo, Aluno VIP!" : "👋 Bem-vindo!"));
-        
-        System.out.println("✅ Login realizado: " + email + " - VIP: " + isVIP);
+    String email = campoEmail.getText().trim();
+    String senha = new String(campoSenha.getPassword());
+    boolean isVIP = checkVIP.isSelected();
+    
+    if (email.isEmpty()) {
+        mostrarErro("Por favor, informe seu email!");
+        campoEmail.requestFocus();
+        return;
     }
+    
+    if (senha.isEmpty()) {
+        mostrarErro("Por favor, informe sua senha!");
+        campoSenha.requestFocus();
+        return;
+    }
+    
+    // Validação de email
+    if (!email.contains("@") || !email.contains(".")) {
+        mostrarErro("Por favor, informe um email válido!");
+        campoEmail.requestFocus();
+        campoEmail.selectAll();
+        return;
+    }
+    
+    // Tentar fazer login
+    Usuario usuario = UsuarioController.fazerLogin(email, senha);
+    
+    if (usuario != null) {
+        mostrarSucesso("Login realizado com sucesso!\n" + 
+                      (usuario instanceof main.java.com.educaonline.model.AlunoVIP ? "🌟 Bem-vindo, Aluno VIP!" : "👋 Bem-vindo!"));
+        
+        // Abrir dashboard
+        new DashboardFrame(usuario).setVisible(true);
+        dispose(); // Fecha a tela de login
+    } else {
+        mostrarErro("Email ou senha incorretos!");
+    }
+   }
+
     
     private void mostrarErro(String mensagem) {
         JOptionPane.showMessageDialog(this, 
