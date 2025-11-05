@@ -17,7 +17,7 @@ public class DashboardProfessorFrame extends JFrame {
     }
     
     private void configurarJanela() {
-        setTitle("👨‍🏫 EducaOnline - Área do Professor");
+        setTitle("EducaOnline - Area do Professor");
         setSize(1000, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,7 +46,7 @@ public class DashboardProfessorFrame extends JFrame {
         header.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         header.setPreferredSize(new Dimension(100, 70));
         
-        JLabel titulo = new JLabel("👨‍🏫 Área do Professor - EducaOnline");
+        JLabel titulo = new JLabel("Area do Professor - EducaOnline");
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         titulo.setForeground(Color.WHITE);
         
@@ -76,14 +76,14 @@ public class DashboardProfessorFrame extends JFrame {
         menuPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
         String[] botoesMenu = {
-            "📊 Dashboard",
-            "📚 Meus Cursos", 
-            "👥 Minhas Turmas",
-            "📝 Cadastrar Curso",
-            "📋 Lista de Alunos",
-            "📊 Notas e Avaliações",
-            "📈 Relatórios",
-            "⚙️ Configurações"
+            "Dashboard",
+            "Meus Cursos", 
+            "Minhas Turmas",
+            "Cadastrar Curso",
+            "Lista de Alunos",
+            "Notas e Avaliacoes",
+            "Relatorios",
+            "Configuracoes"
         };
         
         for (String textoBotao : botoesMenu) {
@@ -116,7 +116,7 @@ public class DashboardProfessorFrame extends JFrame {
     }
     
     private JButton criarBotaoSair() {
-        JButton botaoSair = new JButton("🚪 Sair do Sistema");
+        JButton botaoSair = new JButton("Sair do Sistema");
         botaoSair.setAlignmentX(Component.LEFT_ALIGNMENT);
         botaoSair.setMaximumSize(new Dimension(180, 45));
         botaoSair.setBackground(new Color(220, 80, 60));
@@ -127,10 +127,11 @@ public class DashboardProfessorFrame extends JFrame {
             int confirm = JOptionPane.showConfirmDialog(
                 DashboardProfessorFrame.this, 
                 "Deseja realmente sair do sistema?", 
-                "Confirmar Saída", 
+                "Confirmar Saida", 
                 JOptionPane.YES_NO_OPTION
             );
             if (confirm == JOptionPane.YES_OPTION) {
+                new LoginFrame().setVisible(true);
                 dispose();
             }
         });
@@ -167,8 +168,8 @@ public class DashboardProfessorFrame extends JFrame {
             + "<h1>Bem-vindo, Professor " + professor.getNome() + "!</h1>"
             + "<p style='font-size: 14px; color: #666;'>"
             + "Especialidade: " + professor.getEspecialidade() + " | "
-            + "Nível: " + professor.getNivelExperiencia() + " | "
-            + "Experiência: " + professor.getAnosExperiencia() + " anos"
+            + "Nivel: " + professor.getNivelExperiencia() + " | "
+            + "Experiencia: " + professor.getAnosExperiencia() + " anos"
             + "</p></div></html>");
         lblBoasVindas.setHorizontalAlignment(SwingConstants.CENTER);
         
@@ -183,10 +184,10 @@ public class DashboardProfessorFrame extends JFrame {
         statsPanel.setBackground(Color.WHITE);
         
         String[][] estatisticas = {
-            {"📚", "Cursos Ministrados", "5"},
-            {"👥", "Alunos Ativos", "127"}, 
-            {"⭐", "Avaliação Média", "4.8"},
-            {"💼", "Salário Base", "R$ 8.500"}
+            {"Cursos", "Cursos Ministrados", "5"},
+            {"Alunos", "Alunos Ativos", "127"}, 
+            {"Avaliacao", "Avaliacao Media", "4.8"},
+            {"Salario", "Salario Base", "R$ 8.500"}
         };
         
         for (String[] stat : estatisticas) {
@@ -207,7 +208,7 @@ public class DashboardProfessorFrame extends JFrame {
         ));
         
         JLabel lblIcone = new JLabel(icone);
-        lblIcone.setFont(new Font("Arial", Font.PLAIN, 28));
+        lblIcone.setFont(new Font("Arial", Font.BOLD, 24));
         lblIcone.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel lblTitulo = new JLabel(titulo);
@@ -231,25 +232,25 @@ public class DashboardProfessorFrame extends JFrame {
     private JPanel criarPainelAcoesRapidas() {
         JPanel quickPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         quickPanel.setBackground(Color.WHITE);
-        quickPanel.setBorder(BorderFactory.createTitledBorder("Ações Rápidas"));
+        quickPanel.setBorder(BorderFactory.createTitledBorder("Acoes Rapidas"));
         
         String[][] acoes = {
-            {"📝", "Novo Curso", "NOVO_CURSO"},
-            {"👥", "Minhas Turmas", "TURMAS"}, 
-            {"📋", "Lista Alunos", "ALUNOS"},
-            {"📊", "Lançar Notas", "NOTAS"}
+            {"Novo Curso", "NOVO_CURSO"},
+            {"Minhas Turmas", "TURMAS"}, 
+            {"Lista Alunos", "ALUNOS"},
+            {"Lancar Notas", "NOTAS"}
         };
         
         for (String[] acao : acoes) {
-            JButton btnAcao = criarBotaoAcaoRapida(acao[0], acao[1], acao[2]);
+            JButton btnAcao = criarBotaoAcaoRapida(acao[0], acao[1]);
             quickPanel.add(btnAcao);
         }
         
         return quickPanel;
     }
     
-    private JButton criarBotaoAcaoRapida(String icone, String texto, String comando) {
-        JButton botao = new JButton("<html><center>" + icone + "<br>" + texto + "</center></html>");
+    private JButton criarBotaoAcaoRapida(String texto, String comando) {
+        JButton botao = new JButton("<html><center>" + texto + "</center></html>");
         botao.setPreferredSize(new Dimension(120, 80));
         botao.setBackground(new Color(230, 240, 255));
         botao.setBorder(BorderFactory.createCompoundBorder(
@@ -267,16 +268,16 @@ public class DashboardProfessorFrame extends JFrame {
                 break;
             case "TURMAS":
                 JOptionPane.showMessageDialog(this, 
-                    "👥 Gerenciamento de Turmas\n\n"
-                    + "• Java Básico - Turma A (30 alunos)\n"
-                    + "• Java Avançado - Turma B (25 alunos)\n"
-                    + "• Matemática - Turma C (40 alunos)",
+                    "Gerenciamento de Turmas\n\n"
+                    + "• Java Basico - Turma A (30 alunos)\n"
+                    + "• Java Avancado - Turma B (25 alunos)\n"
+                    + "• Matematica - Turma C (40 alunos)",
                     "Minhas Turmas",
                     JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "ALUNOS":
                 JOptionPane.showMessageDialog(this, 
-                    "📋 Lista de Alunos\n\n"
+                    "Lista de Alunos\n\n"
                     + "Total de alunos: 127\n"
                     + "Alunos VIP: 15\n"
                     + "Alunos Regulares: 112",
@@ -285,10 +286,10 @@ public class DashboardProfessorFrame extends JFrame {
                 break;
             case "NOTAS":
                 JOptionPane.showMessageDialog(this, 
-                    "📊 Sistema de Avaliações\n\n"
+                    "Sistema de Avaliacoes\n\n"
                     + "Funcionalidade em desenvolvimento\n"
-                    + "Em breve: lançamento de notas e relatórios",
-                    "Lançar Notas",
+                    + "Em breve: lancamento de notas e relatorios",
+                    "Lancar Notas",
                     JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
@@ -300,36 +301,36 @@ public class DashboardProfessorFrame extends JFrame {
             String comando = ((JButton) e.getSource()).getText();
             
             switch (comando) {
-                case "📚 Meus Cursos":
+                case "Meus Cursos":
                     JOptionPane.showMessageDialog(DashboardProfessorFrame.this,
-                        "📚 Meus Cursos Ministrados:\n\n"
-                        + "• Java Básico (40 horas)\n"
-                        + "• Java Avançado e POO (60 horas)\n"
-                        + "• Matemática para Programadores (35 horas)\n"
+                        "Meus Cursos Ministrados:\n\n"
+                        + "• Java Basico (40 horas)\n"
+                        + "• Java Avancado e POO (60 horas)\n"
+                        + "• Matematica para Programadores (35 horas)\n"
                         + "• Design Patterns (45 horas)",
                         "Meus Cursos",
                         JOptionPane.INFORMATION_MESSAGE);
                     break;
-                case "👥 Minhas Turmas":
+                case "Minhas Turmas":
                     JOptionPane.showMessageDialog(DashboardProfessorFrame.this,
-                        "👥 Minhas Turmas Ativas:\n\n"
-                        + "• Java Básico - Turma A (30/30 alunos)\n"
-                        + "• Java Avançado - Turma B (25/25 alunos)\n"
-                        + "• Matemática - Turma C (40/40 alunos)",
+                        "Minhas Turmas Ativas:\n\n"
+                        + "• Java Basico - Turma A (30/30 alunos)\n"
+                        + "• Java Avancado - Turma B (25/25 alunos)\n"
+                        + "• Matematica - Turma C (40/40 alunos)",
                         "Minhas Turmas",
                         JOptionPane.INFORMATION_MESSAGE);
                     break;
-                case "📝 Cadastrar Curso":
+                case "Cadastrar Curso":
                     new CursoCadastroFrame().setVisible(true);
                     break;
-                case "📊 Notas e Avaliações":
+                case "Notas e Avaliacoes":
                     JOptionPane.showMessageDialog(DashboardProfessorFrame.this,
-                        "📊 Sistema de Avaliações\n\n"
-                        + "• Lançar notas dos alunos\n"
+                        "Sistema de Avaliacoes\n\n"
+                        + "• Lancar notas dos alunos\n"
                         + "• Gerar boletins\n"
-                        + "• Estatísticas de desempenho\n"
-                        + "• Relatórios de aprovação",
-                        "Notas e Avaliações",
+                        + "• Estatisticas de desempenho\n"
+                        + "• Relatorios de aprovacao",
+                        "Notas e Avaliacoes",
                         JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:

@@ -17,7 +17,7 @@ public class DashboardAlunoFrame extends JFrame {
     }
     
     private void configurarJanela() {
-        setTitle("🎓 EducaOnline - Área do Aluno");
+        setTitle("EducaOnline - Area do Aluno");
         setSize(1000, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,12 +46,12 @@ public class DashboardAlunoFrame extends JFrame {
         header.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         header.setPreferredSize(new Dimension(100, 70));
         
-        JLabel titulo = new JLabel("🎓 Área do Aluno - EducaOnline");
+        JLabel titulo = new JLabel("Area do Aluno - EducaOnline");
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         titulo.setForeground(Color.WHITE);
         
         boolean isVIP = usuarioLogado instanceof AlunoVIP;
-        String vipText = isVIP ? " ⭐ VIP" : "";
+        String vipText = isVIP ? " - VIP" : "";
         JLabel usuarioInfo = new JLabel("Aluno: " + usuarioLogado.getNome() + vipText);
         usuarioInfo.setFont(new Font("Arial", Font.PLAIN, 14));
         usuarioInfo.setForeground(Color.WHITE);
@@ -76,27 +76,28 @@ public class DashboardAlunoFrame extends JFrame {
         menuPanel.add(menuTitulo);
         menuPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
-        String[] botoesMenu = {
-            "📊 Meu Dashboard",
-            "📚 Cursos Disponíveis", 
-            "🎫 Minhas Matrículas",
-            "📋 Meu Histórico",
-            "🏆 Meus Certificados",
-            "💳 Meus Pagamentos",
-            "📞 Suporte"
-        };
-        
+        String[] botoesMenu;
         if (usuarioLogado instanceof AlunoVIP) {
             botoesMenu = new String[]{
-                "📊 Meu Dashboard",
-                "📚 Cursos Disponíveis", 
-                "🎫 Minhas Matrículas",
-                "📋 Meu Histórico",
-                "🏆 Meus Certificados",
-                "⭐ Área VIP",
-                "👨‍🏫 Mentorias",
-                "💳 Meus Pagamentos",
-                "📞 Suporte VIP"
+                "Dashboard",
+                "Cursos Disponiveis", 
+                "Minhas Matriculas",
+                "Meu Historico",
+                "Meus Certificados",
+                "Area VIP",
+                "Mentorias",
+                "Meus Pagamentos",
+                "Suporte VIP"
+            };
+        } else {
+            botoesMenu = new String[]{
+                "Dashboard",
+                "Cursos Disponiveis", 
+                "Minhas Matriculas",
+                "Meu Historico",
+                "Meus Certificados",
+                "Meus Pagamentos",
+                "Suporte"
             };
         }
         
@@ -130,26 +131,27 @@ public class DashboardAlunoFrame extends JFrame {
     }
     
     private JButton criarBotaoSair() {
-    JButton botaoSair = new JButton("🚪 Sair do Sistema");
-    botaoSair.setAlignmentX(Component.LEFT_ALIGNMENT);
-    botaoSair.setMaximumSize(new Dimension(180, 45));
-    botaoSair.setBackground(new Color(220, 80, 60));
-    botaoSair.setForeground(Color.WHITE);
-    botaoSair.setFocusPainted(false);
-    botaoSair.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
-    botaoSair.addActionListener(e -> {
-        int confirm = JOptionPane.showConfirmDialog(
-            DashboardAlunoFrame.this, 
-            "Deseja realmente sair do sistema?", 
-            "Confirmar Saída", 
-            JOptionPane.YES_NO_OPTION
-        );
-        if (confirm == JOptionPane.YES_OPTION) {
-            dispose();
-        }
-    });
-    return botaoSair;
-}
+        JButton botaoSair = new JButton("Sair do Sistema");
+        botaoSair.setAlignmentX(Component.LEFT_ALIGNMENT);
+        botaoSair.setMaximumSize(new Dimension(180, 45));
+        botaoSair.setBackground(new Color(220, 80, 60));
+        botaoSair.setForeground(Color.WHITE);
+        botaoSair.setFocusPainted(false);
+        botaoSair.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
+        botaoSair.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(
+                DashboardAlunoFrame.this, 
+                "Deseja realmente sair do sistema?", 
+                "Confirmar Saida", 
+                JOptionPane.YES_NO_OPTION
+            );
+            if (confirm == JOptionPane.YES_OPTION) {
+                new LoginFrame().setVisible(true);
+                dispose();
+            }
+        });
+        return botaoSair;
+    }
     
     private JPanel criarAreaConteudo() {
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -178,8 +180,8 @@ public class DashboardAlunoFrame extends JFrame {
         
         boolean isVIP = usuarioLogado instanceof AlunoVIP;
         String mensagemVIP = isVIP ? 
-            "🌟 Você é um aluno VIP! Aproveite todos os benefícios exclusivos." :
-            "💡 Torne-se VIP para acessar cursos exclusivos e suporte prioritário!";
+            "Voce e um aluno VIP! Aproveite todos os beneficios exclusivos." :
+            "Torne-se VIP para acessar cursos exclusivos e suporte prioritario!";
         
         JLabel lblBoasVindas = new JLabel("<html><div style='text-align: center;'>"
             + "<h1>Bem-vindo, " + usuarioLogado.getNome() + "!</h1>"
@@ -198,10 +200,10 @@ public class DashboardAlunoFrame extends JFrame {
         statsPanel.setBackground(Color.WHITE);
         
         String[][] estatisticas = {
-            {"📚", "Cursos Matriculados", "3"},
-            {"✅", "Cursos Concluídos", "1"}, 
-            {"📊", "Média Geral", "8.2"},
-            {"⏱️", "Horas Estudadas", "45h"}
+            {"Cursos", "Cursos Matriculados", "3"},
+            {"Concluidos", "Cursos Concluidos", "1"}, 
+            {"Media", "Media Geral", "8.2"},
+            {"Horas", "Horas Estudadas", "45h"}
         };
         
         for (String[] stat : estatisticas) {
@@ -222,7 +224,7 @@ public class DashboardAlunoFrame extends JFrame {
         ));
         
         JLabel lblIcone = new JLabel(icone);
-        lblIcone.setFont(new Font("Arial", Font.PLAIN, 28));
+        lblIcone.setFont(new Font("Arial", Font.BOLD, 24));
         lblIcone.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel lblTitulo = new JLabel(titulo);
@@ -246,25 +248,25 @@ public class DashboardAlunoFrame extends JFrame {
     private JPanel criarPainelAcoesRapidas() {
         JPanel quickPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         quickPanel.setBackground(Color.WHITE);
-        quickPanel.setBorder(BorderFactory.createTitledBorder("Ações Rápidas"));
+        quickPanel.setBorder(BorderFactory.createTitledBorder("Acoes Rapidas"));
         
         String[][] acoes = {
-            {"📚", "Ver Cursos", "CURSOS"},
-            {"🎫", "Minhas Matrículas", "MATRICULAS"}, 
-            {"🏆", "Certificados", "CERTIFICADOS"},
-            {"📞", "Suporte", "SUPORTE"}
+            {"Ver Cursos", "CURSOS"},
+            {"Minhas Matriculas", "MATRICULAS"}, 
+            {"Certificados", "CERTIFICADOS"},
+            {"Suporte", "SUPORTE"}
         };
         
         for (String[] acao : acoes) {
-            JButton btnAcao = criarBotaoAcaoRapida(acao[0], acao[1], acao[2]);
+            JButton btnAcao = criarBotaoAcaoRapida(acao[0], acao[1]);
             quickPanel.add(btnAcao);
         }
         
         return quickPanel;
     }
     
-    private JButton criarBotaoAcaoRapida(String icone, String texto, String comando) {
-        JButton botao = new JButton("<html><center>" + icone + "<br>" + texto + "</center></html>");
+    private JButton criarBotaoAcaoRapida(String texto, String comando) {
+        JButton botao = new JButton("<html><center>" + texto + "</center></html>");
         botao.setPreferredSize(new Dimension(120, 80));
         botao.setBackground(new Color(240, 245, 255));
         botao.setBorder(BorderFactory.createCompoundBorder(
@@ -288,10 +290,10 @@ public class DashboardAlunoFrame extends JFrame {
                 break;
             case "SUPORTE":
                 JOptionPane.showMessageDialog(this, 
-                    "📞 Entre em contato com nosso suporte:\n\n" +
-                    "📧 Email: suporte@educaonline.com\n" +
-                    "📱 WhatsApp: (11) 99999-9999\n" +
-                    "🕒 Horário: 8h às 18h",
+                    "Entre em contato com nosso suporte:\n\n" +
+                    "Email: suporte@educaonline.com\n" +
+                    "WhatsApp: (11) 99999-9999\n" +
+                    "Horario: 8h as 18h",
                     "Suporte EducaOnline",
                     JOptionPane.INFORMATION_MESSAGE);
                 break;
@@ -304,28 +306,28 @@ public class DashboardAlunoFrame extends JFrame {
             String comando = ((JButton) e.getSource()).getText();
             
             switch (comando) {
-                case "📚 Cursos Disponíveis":
+                case "Cursos Disponiveis":
                     new CursoListagemFrame(usuarioLogado).setVisible(true);
                     break;
-                case "🎫 Minhas Matrículas":
+                case "Minhas Matriculas":
                     new MatriculaFrame(usuarioLogado).setVisible(true);
                     break;
-                case "🏆 Meus Certificados":
+                case "Meus Certificados":
                     new CertificadoFrame(usuarioLogado).setVisible(true);
                     break;
-                case "⭐ Área VIP":
+                case "Area VIP":
                     if (usuarioLogado instanceof AlunoVIP) {
                         JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
-                            "🌟 Área VIP - Benefícios Exclusivos:\n\n" +
+                            "Area VIP - Beneficios Exclusivos:\n\n" +
                             "• Cursos exclusivos\n" +
                             "• Mentorias personalizadas\n" +
-                            "• Suporte prioritário\n" +
+                            "• Suporte prioritario\n" +
                             "• Descontos especiais",
-                            "Área VIP",
+                            "Area VIP",
                             JOptionPane.INFORMATION_MESSAGE);
                     }
                     break;
-                case "👨‍🏫 Mentorias":
+                case "Mentorias":
                     if (usuarioLogado instanceof AlunoVIP) {
                         JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
                             "Agende suas mentorias com nossos especialistas!",
@@ -333,6 +335,23 @@ public class DashboardAlunoFrame extends JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                     }
                     break;
+                case "Meus Pagamentos":
+                    JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
+                        "Visualize seus pagamentos e faturas aqui.",
+                        "Meus Pagamentos",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case "Suporte VIP":
+                    if (usuarioLogado instanceof AlunoVIP) {
+                        JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
+                            "Entre em contato com nosso suporte VIP:\n\n" +
+                            "Email: suporte@educaonline.com\n" +
+                            "WhatsApp: (11) 99999-9999\n" +
+                            "Horário: 8h às 18h",
+                            "Suporte EducaOnline",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                     break;
                 default:
                     JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
                         "Funcionalidade em desenvolvimento: " + comando,
