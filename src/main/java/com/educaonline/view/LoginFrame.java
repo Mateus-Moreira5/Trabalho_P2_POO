@@ -107,7 +107,7 @@ public class LoginFrame extends JFrame {
         gbc.gridwidth = 2;
         btnLogin = new JButton("Entrar no Sistema");
         btnLogin.setBackground(new Color(0, 120, 215));
-        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setForeground(Color.BLACK);
         btnLogin.setFocusPainted(false);
         btnLogin.setFont(new Font("Arial", Font.BOLD, 14));
         btnLogin.setPreferredSize(new Dimension(200, 40));
@@ -175,11 +175,11 @@ public class LoginFrame extends JFrame {
             
             String mensagemSucesso = "Login realizado com sucesso!\n";
             if (usuario instanceof AlunoVIP) {
-                mensagemSucesso += "🌟 Bem-vindo, Aluno VIP!";
+                mensagemSucesso += "Bem-vindo, Aluno VIP!";
             } else if (usuario instanceof Professor) {
-                mensagemSucesso += "👨‍🏫 Bem-vindo, Professor!";
+                mensagemSucesso += "Bem-vindo, Professor!";
             } else {
-                mensagemSucesso += "👋 Bem-vindo!";
+                mensagemSucesso += "Bem-vindo!";
             }
             
             mostrarSucesso(mensagemSucesso);
@@ -229,7 +229,7 @@ public class LoginFrame extends JFrame {
     private void mostrarSucesso(String mensagem) {
         JOptionPane.showMessageDialog(this, 
             mensagem, 
-            "Login Bem-sucedido", 
+            "Login Bem-sucedido!", 
             JOptionPane.INFORMATION_MESSAGE);
     }
 }

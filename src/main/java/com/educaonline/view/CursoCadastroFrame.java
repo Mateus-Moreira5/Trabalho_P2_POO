@@ -19,7 +19,7 @@ public class CursoCadastroFrame extends JFrame {
     }
     
     private void configurarJanela() {
-        setTitle("📝 Cadastro de Curso - EducaOnline");
+        setTitle("Cadastro de Curso - EducaOnline");
         setSize(600, 600);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -101,14 +101,14 @@ public class CursoCadastroFrame extends JFrame {
         // Checkbox Exclusivo VIP
         gbc.gridx = 0; gbc.gridy = 6;
         gbc.gridwidth = 2;
-        checkExclusivoVIP = new JCheckBox("Curso Exclusivo para Alunos VIP ⭐");
+        checkExclusivoVIP = new JCheckBox("Curso Exclusivo para Alunos VIP");
         checkExclusivoVIP.setToolTipText("Apenas alunos VIP poderão se matricular neste curso");
         formPanel.add(checkExclusivoVIP, gbc);
         
         // Sugestões de categoria
         gbc.gridx = 0; gbc.gridy = 7;
         gbc.gridwidth = 2;
-        JLabel lblSugestoes = new JLabel("💡 Sugestões de categoria: Programação, Matemática, Design, Marketing, Negócios");
+        JLabel lblSugestoes = new JLabel("Sugestões de categoria: Programação, Matemática, Design, Marketing, Negócios");
         lblSugestoes.setFont(new Font("Arial", Font.PLAIN, 10));
         lblSugestoes.setForeground(Color.GRAY);
         formPanel.add(lblSugestoes, gbc);
@@ -120,9 +120,9 @@ public class CursoCadastroFrame extends JFrame {
         JPanel panelBotoes = new JPanel(new FlowLayout());
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         
-        btnCadastrar = new JButton("✅ Cadastrar Curso");
+        btnCadastrar = new JButton("Cadastrar Curso");
         btnCadastrar.setBackground(new Color(0, 150, 0));
-        btnCadastrar.setForeground(Color.WHITE);
+        btnCadastrar.setForeground(Color.BLACK);
         btnCadastrar.setFocusPainted(false);
         btnCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -130,7 +130,7 @@ public class CursoCadastroFrame extends JFrame {
             }
         });
         
-        btnLimpar = new JButton("🔄 Limpar");
+        btnLimpar = new JButton("Limpar");
         btnLimpar.setBackground(new Color(200, 200, 200));
         btnLimpar.setFocusPainted(false);
         btnLimpar.addActionListener(new ActionListener() {
@@ -139,9 +139,9 @@ public class CursoCadastroFrame extends JFrame {
             }
         });
         
-        btnCancelar = new JButton("❌ Cancelar");
+        btnCancelar = new JButton("Cancelar");
         btnCancelar.setBackground(new Color(220, 80, 60));
-        btnCancelar.setForeground(Color.WHITE);
+        btnCancelar.setForeground(Color.BLACK);
         btnCancelar.setFocusPainted(false);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -182,14 +182,14 @@ public class CursoCadastroFrame extends JFrame {
         
         // Mensagem de sucesso
         JOptionPane.showMessageDialog(this,
-            "✅ Curso cadastrado com sucesso!\n\n" +
+            "Curso cadastrado com sucesso!\n\n" +
             "ID: " + cursoId + "\n" +
             "Título: " + titulo + "\n" +
             "Categoria: " + categoria + "\n" +
             "Preço: R$ " + String.format("%.2f", preco) + "\n" +
             "Carga Horária: " + cargaHoraria + " horas\n" +
             "Vagas: " + limiteVagas + " alunos\n" +
-            "Tipo: " + (exclusivoVIP ? "Exclusivo VIP ⭐" : "Curso Regular"),
+            "Tipo: " + (exclusivoVIP ? "Exclusivo VIP" : "Curso Regular"),
             "Curso Cadastrado",
             JOptionPane.INFORMATION_MESSAGE);
             
@@ -280,7 +280,7 @@ public class CursoCadastroFrame extends JFrame {
     private void mostrarErro(String mensagem) {
         JOptionPane.showMessageDialog(this, 
             mensagem, 
-            "Erro no Cadastro", 
+            "Erro no Cadastro!", 
             JOptionPane.ERROR_MESSAGE);
     }
 }
