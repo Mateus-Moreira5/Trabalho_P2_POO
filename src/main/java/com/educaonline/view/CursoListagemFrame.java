@@ -126,7 +126,7 @@ public class CursoListagemFrame extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, 
                     "Erro ao realizar matrícula. Verifique se há vagas disponíveis.", 
-                    "Erro", 
+                    "Erro!", 
                     JOptionPane.ERROR_MESSAGE);
             }
         }

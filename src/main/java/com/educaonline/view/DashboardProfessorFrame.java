@@ -336,7 +336,7 @@ public class DashboardProfessorFrame extends JFrame {
                 default:
                     JOptionPane.showMessageDialog(DashboardProfessorFrame.this,
                         "Funcionalidade em desenvolvimento: " + comando,
-                        "Em Desenvolvimento",
+                        "Em Desenvolvimento!",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }

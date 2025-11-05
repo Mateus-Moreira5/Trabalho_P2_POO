@@ -280,7 +280,7 @@ public class CursoCadastroFrame extends JFrame {
     private void mostrarErro(String mensagem) {
         JOptionPane.showMessageDialog(this, 
             mensagem, 
-            "Erro no Cadastro", 
+            "Erro no Cadastro!", 
             JOptionPane.ERROR_MESSAGE);
     }
 }

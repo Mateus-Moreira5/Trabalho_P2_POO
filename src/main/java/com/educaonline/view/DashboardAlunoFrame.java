@@ -355,7 +355,7 @@ public class DashboardAlunoFrame extends JFrame {
                 default:
                     JOptionPane.showMessageDialog(DashboardAlunoFrame.this,
                         "Funcionalidade em desenvolvimento: " + comando,
-                        "Em Desenvolvimento",
+                        "Em Desenvolvimento!",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }

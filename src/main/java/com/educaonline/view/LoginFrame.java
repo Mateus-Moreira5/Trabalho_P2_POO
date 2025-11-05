@@ -229,7 +229,7 @@ public class LoginFrame extends JFrame {
     private void mostrarSucesso(String mensagem) {
         JOptionPane.showMessageDialog(this, 
             mensagem, 
-            "Login Bem-sucedido", 
+            "Login Bem-sucedido!", 
             JOptionPane.INFORMATION_MESSAGE);
     }
 }
