@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import main.java.com.educaonline.model.Usuario;
-import main.java.com.educaonline.model.Aluno;
 import main.java.com.educaonline.model.AlunoVIP;
 
 public class DashboardFrame extends JFrame {

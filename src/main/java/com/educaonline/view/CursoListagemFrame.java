@@ -2,8 +2,6 @@ package main.java.com.educaonline.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import main.java.com.educaonline.model.Usuario;
 import main.java.com.educaonline.model.Curso;
 import main.java.com.educaonline.util.DatabaseUtil;
