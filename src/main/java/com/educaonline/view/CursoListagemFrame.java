@@ -19,7 +19,7 @@ public class CursoListagemFrame extends JFrame {
     }
     
     private void configurarJanela() {
-        setTitle("📚 Cursos Disponíveis - EducaOnline");
+        setTitle("Cursos Disponíveis - EducaOnline");
         setSize(1000, 700);
         setLocationRelativeTo(null);
     }
@@ -65,7 +65,7 @@ public class CursoListagemFrame extends JFrame {
         cursosPanel.revalidate();
         cursosPanel.repaint();
     }
-    
+
     private JPanel criarCardCurso(Curso curso) {
     JPanel card = new JPanel(new BorderLayout());
     card.setBackground(Color.WHITE);
@@ -75,20 +75,18 @@ public class CursoListagemFrame extends JFrame {
     ));
     card.setMaximumSize(new Dimension(800, 120));
     
-    // Informações do curso
     JPanel infoPanel = new JPanel(new GridLayout(3, 1));
     infoPanel.setBackground(Color.WHITE);
     
-    JLabel titulo = new JLabel(curso.getTitulo() + (curso.isExclusivoVIP() ? " ⭐" : ""));
+    JLabel titulo = new JLabel(curso.getTitulo() + (curso.isExclusivoVIP() ? " [VIP]" : ""));
     titulo.setFont(new Font("Arial", Font.BOLD, 16));
     
     JLabel descricao = new JLabel(curso.getDescricao());
     descricao.setFont(new Font("Arial", Font.PLAIN, 12));
     descricao.setForeground(Color.GRAY);
     
-    // CORREÇÃO: Use cargaHoraria em vez de categoria duas vezes
     JLabel detalhes = new JLabel(String.format(
-        "💵 R$ %.2f | ⏱️ %d horas | 👥 %d/%d vagas | 📁 %s",
+        "R$ %.2f | %d horas | %d/%d vagas | %s",
         curso.getPreco(), curso.getCargaHoraria(), 
         curso.getAlunosMatriculados(), curso.getLimiteVagas(),
         curso.getCategoria()
@@ -99,20 +97,18 @@ public class CursoListagemFrame extends JFrame {
     infoPanel.add(descricao);
     infoPanel.add(detalhes);
     
-    // Botão de matrícula
     JButton btnMatricular = new JButton("Matricular");
     btnMatricular.setBackground(new Color(0, 150, 0));
-    btnMatricular.setForeground(Color.WHITE);
+    btnMatricular.setForeground(Color.BLACK);
     btnMatricular.setFocusPainted(false);
     btnMatricular.addActionListener(e -> matricularCurso(curso));
     
-    // Layout
     card.add(infoPanel, BorderLayout.CENTER);
     card.add(btnMatricular, BorderLayout.EAST);
     
     return card;
-   };
-    
+}  
+
     private void matricularCurso(Curso curso) {
         int confirm = JOptionPane.showConfirmDialog(this,
             "Deseja se matricular no curso:\n" + curso.getTitulo() + "\n\nValor: R$ " + curso.getPreco(),
@@ -123,14 +119,14 @@ public class CursoListagemFrame extends JFrame {
             boolean sucesso = DatabaseUtil.matricularAlunoCurso(usuario.getEmail(), curso.getId());
             if (sucesso) {
                 JOptionPane.showMessageDialog(this, 
-                    "✅ Matrícula realizada com sucesso!", 
+                    "Matrícula realizada com sucesso!", 
                     "Sucesso", 
                     JOptionPane.INFORMATION_MESSAGE);
                 carregarCursos(); // Atualiza a lista
             } else {
                 JOptionPane.showMessageDialog(this, 
-                    "❌ Erro ao realizar matrícula. Verifique se há vagas disponíveis.", 
-                    "Erro", 
+                    "Erro ao realizar matrícula. Verifique se há vagas disponíveis.", 
+                    "Erro!", 
                     JOptionPane.ERROR_MESSAGE);
             }
         }
