@@ -2,10 +2,9 @@ package main.java.com.educaonline.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import main.java.com.educaonline.controller.UsuarioController;
 import main.java.com.educaonline.model.Usuario;
+import main.java.com.educaonline.model.Aluno;
 import main.java.com.educaonline.model.AlunoVIP;
 import main.java.com.educaonline.model.Professor;
 
@@ -107,35 +106,27 @@ public class LoginFrame extends JFrame {
         gbc.gridwidth = 2;
         btnLogin = new JButton("Entrar no Sistema");
         btnLogin.setBackground(new Color(0, 120, 215));
-        btnLogin.setForeground(Color.BLACK);
+        btnLogin.setForeground(Color.WHITE);
         btnLogin.setFocusPainted(false);
         btnLogin.setFont(new Font("Arial", Font.BOLD, 14));
         btnLogin.setPreferredSize(new Dimension(200, 40));
         panel.add(btnLogin, gbc);
         
-        campoEmail.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fazerLogin();
-            }
-        });
+        // Adicionar dados de exemplo para teste
+        gbc.gridy = 8;
+        JButton btnDadosTeste = new JButton("Usar Dados de Teste");
+        btnDadosTeste.setBackground(new Color(100, 100, 100));
+        btnDadosTeste.setForeground(Color.WHITE);
+        btnDadosTeste.setFocusPainted(false);
+        btnDadosTeste.addActionListener(e -> preencherDadosTeste());
+        panel.add(btnDadosTeste, gbc);
         
-        campoSenha.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fazerLogin();
-            }
-        });
-        
-        btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fazerLogin();
-            }
-        });
+        // Event listeners
+        campoEmail.addActionListener(e -> fazerLogin());
+        campoSenha.addActionListener(e -> fazerLogin());
+        btnLogin.addActionListener(e -> fazerLogin());
         
         add(panel);
-        pack();
     }
     
     private void fazerLogin() {
@@ -143,6 +134,7 @@ public class LoginFrame extends JFrame {
         String email = campoEmail.getText().trim();
         String senha = new String(campoSenha.getPassword());
         
+        // Validações básicas
         if (email.isEmpty()) {
             mostrarErro("Por favor, informe seu email!");
             campoEmail.requestFocus();
@@ -162,20 +154,21 @@ public class LoginFrame extends JFrame {
             return;
         }
         
+        // Tentar fazer login
         Usuario usuario = UsuarioController.fazerLogin(email, senha);
         
         if (usuario != null) {
-            boolean tipoCorreto = validarTipoUsuario(usuario, tipoUsuario);
-            
-            if (!tipoCorreto) {
+            // Verificar se o tipo de usuário está correto
+            if (!validarTipoUsuario(usuario, tipoUsuario)) {
                 String tipoReal = obterTipoRealUsuario(usuario);
                 mostrarErro("Tipo de usuário incorreto! Você é um " + tipoReal + ".");
                 return;
             }
             
+            // Login bem-sucedido
             String mensagemSucesso = "Login realizado com sucesso!\n";
             if (usuario instanceof AlunoVIP) {
-                mensagemSucesso += "Bem-vindo, Aluno VIP!";
+                mensagemSucesso += "Bem-vindo, Aluno VIP! ⭐";
             } else if (usuario instanceof Professor) {
                 mensagemSucesso += "Bem-vindo, Professor!";
             } else {
@@ -184,16 +177,12 @@ public class LoginFrame extends JFrame {
             
             mostrarSucesso(mensagemSucesso);
             
-            if (usuario instanceof main.java.com.educaonline.model.Aluno) {
-                new DashboardAlunoFrame(usuario).setVisible(true);
-            } else if (usuario instanceof Professor) {
-                new DashboardProfessorFrame(usuario).setVisible(true);
-            } else {
-                new main.java.com.educaonline.view.DashboardFrame(usuario).setVisible(true);
-            }
+            // Abrir dashboard apropriado
+            abrirDashboard(usuario);
             dispose();
+            
         } else {
-            mostrarErro("Email ou senha incorretos!");
+            mostrarErro("Email ou senha incorretos!\n\nDica: Use o botão 'Usar Dados de Teste' para ver credenciais válidas.");
         }
     }
     
@@ -202,7 +191,7 @@ public class LoginFrame extends JFrame {
             return true;
         } else if (usuario instanceof Professor && "Professor".equals(tipoSelecionado)) {
             return true;
-        } else if (usuario instanceof main.java.com.educaonline.model.Aluno && "Aluno".equals(tipoSelecionado)) {
+        } else if (usuario instanceof Aluno && !(usuario instanceof AlunoVIP) && "Aluno".equals(tipoSelecionado)) {
             return true;
         }
         return false;
@@ -213,10 +202,43 @@ public class LoginFrame extends JFrame {
             return "Aluno VIP";
         } else if (usuario instanceof Professor) {
             return "Professor";
-        } else if (usuario instanceof main.java.com.educaonline.model.Aluno) {
+        } else if (usuario instanceof Aluno) {
             return "Aluno";
         }
         return "Usuário";
+    }
+    
+    private void abrirDashboard(Usuario usuario) {
+        // Usar DashboardFrame unificado para todos os tipos de usuário
+        new DashboardFrame(usuario).setVisible(true);
+    }
+    
+    private void preencherDadosTeste() {
+        String tipoSelecionado = (String) comboTipoUsuario.getSelectedItem();
+        
+        switch (tipoSelecionado) {
+            case "Aluno":
+                campoEmail.setText("joao@email.com");
+                campoSenha.setText("123");
+                break;
+            case "Aluno VIP":
+                campoEmail.setText("ana@vip.com");
+                campoSenha.setText("123");
+                break;
+            case "Professor":
+                // Adicionar um professor de exemplo se não existir
+                campoEmail.setText("professor@educa.com");
+                campoSenha.setText("123");
+                break;
+        }
+        
+        JOptionPane.showMessageDialog(this,
+            "Dados de teste preenchidos!\n\n" +
+            "Email: " + campoEmail.getText() + "\n" +
+            "Senha: " + campoSenha.getText() + "\n\n" +
+            "Clique em 'Entrar no Sistema'",
+            "Dados de Teste",
+            JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void mostrarErro(String mensagem) {

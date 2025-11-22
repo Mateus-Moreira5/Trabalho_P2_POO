@@ -14,21 +14,31 @@ public class MatriculaService {
             return false;
         }
         
+        // Verificar se é VIP para cursos exclusivos
         if (curso.isExclusivoVIP() && !(aluno instanceof AlunoVIP)) {
             return false;
         }
         
+        // Verificar se há vagas
         if (!curso.temVagas()) {
             return false;
         }
         
+        // Verificar se já está matriculado
         if (aluno.estaMatriculado(cursoId)) {
             return false;
         }
         
-        boolean matriculado = curso.matricularAluno();
-        if (matriculado) {
+        // Efetuar matrícula
+        boolean sucessoMatricula = curso.matricularAluno();
+        if (sucessoMatricula) {
             aluno.matricularCurso(cursoId);
+            
+            // Criar registro de matrícula
+            String matriculaId = "MAT" + System.currentTimeMillis();
+            Matricula matricula = new Matricula(matriculaId, aluno.getId(), cursoId, "TURMA001", curso.getPreco());
+            DatabaseUtil.adicionarMatricula(matricula);
+            
             return true;
         }
         
@@ -47,12 +57,13 @@ public class MatriculaService {
             return false;
         }
         
+        // Cancelar matrícula
         curso.cancelarMatricula();
         aluno.cancelarMatricula(cursoId);
         return true;
     }
     
-    public static List<Curso> getCursosMatriculados(String alunoEmail) {
+    public static List<Curso> getCursosDoAluno(String alunoEmail) {
         Aluno aluno = DatabaseUtil.getAlunoPorEmail(alunoEmail);
         if (aluno == null) return List.of();
         
@@ -60,5 +71,13 @@ public class MatriculaService {
                 .map(DatabaseUtil::getCursoPorId)
                 .filter(curso -> curso != null)
                 .toList();
+    }
+    
+    public static List<Curso> getCursosDisponiveis(String alunoEmail) {
+        Aluno aluno = DatabaseUtil.getAlunoPorEmail(alunoEmail);
+        if (aluno == null) return List.of();
+        
+        boolean isVIP = aluno instanceof AlunoVIP;
+        return DatabaseUtil.getCursosDisponiveis(isVIP);
     }
 }

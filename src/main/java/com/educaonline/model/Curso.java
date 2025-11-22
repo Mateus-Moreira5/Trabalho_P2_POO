@@ -85,4 +85,7 @@ public class Curso {
     public Object getCargaHoraria() {
         throw new UnsupportedOperationException("Unimplemented method 'getCargaHoraria'");
     }
+    public String getPrecoFormatado() {
+        return String.format("R$ %.2f", this.preco);
+    }
 }
