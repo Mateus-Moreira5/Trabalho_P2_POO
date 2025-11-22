@@ -25,6 +25,11 @@ public class Certificado {
         this.codigoVerificacao = gerarCodigoVerificacao();
     }
     
+    public Certificado(String certificadoId, String id2, String cursoId2, String nome, String titulo,
+            Object cargaHoraria2, double notaFinal2) {
+        //TODO Auto-generated constructor stub
+    }
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     

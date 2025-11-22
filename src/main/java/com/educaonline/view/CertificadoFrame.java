@@ -20,7 +20,7 @@ public class CertificadoFrame extends JFrame {
     }
     
     private void configurarJanela() {
-        setTitle("🏆 Meus Certificados - EducaOnline");
+        setTitle(" Meus Certificados - EducaOnline");
         setSize(800, 500);
         setLocationRelativeTo(null);
     }
@@ -29,20 +29,17 @@ public class CertificadoFrame extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        // Header
         JLabel titulo = new JLabel("Meus Certificados", JLabel.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         mainPanel.add(titulo, BorderLayout.NORTH);
-        
-        // Tabela de certificados
+
         String[] colunas = {"Curso", "Data Conclusão", "Carga Horária", "Nota Final", "Status", "Ação"};
         tableModel = new DefaultTableModel(colunas, 0);
         
         tableCertificados = new JTable(tableModel);
         tableCertificados.setRowHeight(40);
         
-        // Renderizador personalizado para coluna de status
         tableCertificados.getColumnModel().getColumn(4).setCellRenderer(new StatusRenderer());
         tableCertificados.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
         tableCertificados.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -50,7 +47,6 @@ public class CertificadoFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tableCertificados);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         
-        // Painel de informações
         JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         infoPanel.setBackground(new Color(240, 240, 240));
@@ -67,7 +63,6 @@ public class CertificadoFrame extends JFrame {
     private void carregarCertificados() {
         tableModel.setRowCount(0);
         
-        // Dados de exemplo - substituir por dados reais do banco
         Object[][] dadosExemplo = {
             {"Java para Iniciantes", "15/03/2024", "40 horas", "8.5", "Disponível", "Emitir"},
             {"Matemática para Programadores", "20/02/2024", "35 horas", "7.2", "Disponível", "Emitir"},
@@ -80,7 +75,6 @@ public class CertificadoFrame extends JFrame {
         }
     }
     
-    // Renderizador para coluna de status
     class StatusRenderer extends JLabel implements javax.swing.table.TableCellRenderer {
         public StatusRenderer() {
             setOpaque(true);
@@ -168,9 +162,8 @@ public class CertificadoFrame extends JFrame {
             if (isPushed) {
                 String curso = (String) tableModel.getValueAt(tableCertificados.getSelectedRow(), 0);
                 
-                // Simular emissão de certificado
                 JOptionPane.showMessageDialog(null, 
-                    "📜 Certificado emitido com sucesso!\n\n" +
+                    "Certificado emitido com sucesso!\n\n" +
                     "Curso: " + curso + "\n" +
                     "Aluno: " + usuario.getNome() + "\n" +
                     "Data de Emissão: " + java.time.LocalDate.now(),
