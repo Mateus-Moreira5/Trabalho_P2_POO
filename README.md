@@ -1,18 +1,63 @@
-## Getting Started
+## 🎓 SISTEMA EDUCACIONAL ONLINE
+Sistema completo de gerenciamento educacional com áreas para alunos e administradores.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## 👥 PARTICIPANTES
+MATEUS MOREIRA FERNANDES
 
-## Folder Structure
+IAN BRITO RIBEIRO DE CASTRO
 
-The workspace contains two folders by default, where:
+CAIO VITOR CAMPELO ALCÂNTARA
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## 🚀 COMO EXECUTAR
+bash
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+javac main/java/educaonline/*.java main/java/educaonline/**/*.java
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+java main.java.educaonline.Main
 
-## Dependency Management
+📋 FUNCIONALIDADES
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+👨‍🎓 ÁREA DO ALUNO
+
+Matrícula em cursos
+
+Histórico acadêmico
+
+Certificados
+
+Cursos exclusivos VIP
+
+## 👨‍💼 ADMINISTRAÇÃO
+Cadastro de cursos e alunos
+
+Controle de matrículas
+
+Registro de pagamentos
+
+Relatórios
+
+## 💰 SISTEMA VIP
+Descontos de 10% em pagamentos
+
+Cursos exclusivos
+
+Suporte prioritário
+
+## 🗂️ ESTRUTURA
+
+data/
+  
+  alunos.txt
+  
+  cursos.txt
+ 
+  matriculas.txt
+ 
+  pagamentos.txt
+
+## ⚙️ TECNOLOGIAS
+Java puro
+
+Persistência em arquivos
+
+Arquitetura em camadas
