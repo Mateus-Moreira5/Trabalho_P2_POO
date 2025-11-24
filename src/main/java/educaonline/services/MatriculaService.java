@@ -55,7 +55,12 @@ public class MatriculaService {
         return true;
     }
     
-    public void concluirCurso(int matriculaId, double nota) {
+    public boolean concluirCurso(int matriculaId, double nota) {
+        if (nota < 0 || nota > 10) {
+            System.out.println("Nota inválida! Deve ser entre 0 e 10.");
+            return false;
+        }
+        
         List<Matricula> matriculas = matriculaRepository.carregarTodos();
         for (Matricula matricula : matriculas) {
             if (matricula.getId() == matriculaId) {
@@ -63,17 +68,18 @@ public class MatriculaService {
                 matricula.setNota(nota);
                 matriculaRepository.atualizar(matricula);
                 System.out.println("Curso concluído com nota: " + nota);
-                return;
+                return true;
             }
         }
         System.out.println("Matrícula não encontrada!");
+        return false;
     }
     
     public List<Matricula> buscarMatriculasPorAluno(int alunoId) {
         return matriculaRepository.buscarPorAlunoId(alunoId);
     }
     
-    public void emitirCertificado(int matriculaId) {
+    public boolean emitirCertificado(int matriculaId) {
         Matricula matricula = null;
         List<Matricula> matriculas = matriculaRepository.carregarTodos();
         for (Matricula m : matriculas) {
@@ -83,19 +89,31 @@ public class MatriculaService {
             }
         }
         
-        if (matricula != null && "CONCLUIDA".equals(matricula.getStatus()) && matricula.getNota() >= 6.0) {
-            var curso = cursoService.buscarCursoPorId(matricula.getCursoId());
-            var aluno = alunoService.buscarAlunoPorId(matricula.getAlunoId());
-            
-            System.out.println("\n=== CERTIFICADO ===");
-            System.out.println("Certificamos que " + aluno.getNome());
-            System.out.println("Concluiu o curso: " + curso.getNome());
-            System.out.println("Com nota: " + matricula.getNota());
-            System.out.println("Data de conclusão: " + matricula.getDataMatricula());
-            System.out.println("Código do certificado: CERT-" + matriculaId);
-            System.out.println("===================\n");
-        } else {
-            System.out.println("Aluno não concluiu o curso ou nota insuficiente para certificado.");
+        if (matricula == null) {
+            System.out.println("Matrícula não encontrada!");
+            return false;
         }
+        
+        if (!"CONCLUIDA".equals(matricula.getStatus())) {
+            System.out.println("Curso não foi concluído!");
+            return false;
+        }
+        
+        if (matricula.getNota() < 6.0) {
+            System.out.println("Nota insuficiente para certificado (mínimo 6.0)!");
+            return false;
+        }
+        
+        var curso = cursoService.buscarCursoPorId(matricula.getCursoId());
+        var aluno = alunoService.buscarAlunoPorId(matricula.getAlunoId());
+        
+        System.out.println("\n=== CERTIFICADO ===");
+        System.out.println("Certificamos que " + aluno.getNome());
+        System.out.println("Concluiu o curso: " + curso.getNome());
+        System.out.println("Com nota: " + matricula.getNota());
+        System.out.println("Data de conclusão: " + matricula.getDataMatricula());
+        System.out.println("Código do certificado: CERT-" + matriculaId);
+        System.out.println("===================\n");
+        return true;
     }
 }
